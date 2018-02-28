@@ -1,10 +1,7 @@
 package controller;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.util.ResourceBundle;
-
 import book.Book;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,10 +12,18 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import db.AuthorTableGateway;
 import db.BookTableGateway;
-import db.PublisherTableGateway;
+import db.GatewayDistributer;
 import model.Author;
 
 public class MenuController implements Initializable {
+	private GatewayDistributer distributer;
+	
+	private AuthorTableGateway authorGateway;
+	private BookTableGateway bookGateway;
+	private ObservableList<Author> authors;
+	private ObservableList<Book> books;
+	private ControllerSingleton controller;
+	
 	@FXML private MenuBar menuBar;
 	@FXML private MenuItem menuItemAddAuthors;
 	@FXML private MenuItem menuItemAuthors;
@@ -27,50 +32,37 @@ public class MenuController implements Initializable {
 	@FXML private MenuItem menuItemQuit;
 	@FXML private BorderPane rootPane;
 	
-	AuthorTableGateway gateway;
-	BookTableGateway bookGateway;
-	//PublisherTableGateway pupGateway;
-	
-	private ObservableList<Author> authors;
-	private ObservableList<Book> books;
-	private ControllerSingleton controller;
-	private Connection conn;
-	
 	public MenuController() {
+		distributer = GatewayDistributer.getInstance();
 		controller = ControllerSingleton.getInstance();
-		conn = controller.getConnection();
-		//pupGateway = new PublisherTableGateway(conn);
-		bookGateway = new BookTableGateway(conn);
-		gateway = new AuthorTableGateway(conn);
 		
+		bookGateway = distributer.getBookGateway();
+		authorGateway = distributer.getAuthorGateway();
 	}
 	
-	@FXML private void handleMenuAction(ActionEvent event) throws IOException {
+	@FXML private void handleMenuAction(ActionEvent event) throws Exception {
 
+		//Author list view
 		if(event.getSource() == menuItemAuthors) {
-			try {
-				authors = gateway.getAuthors();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			authors = authorGateway.getAuthors();
 			controller.changeView("/view/AuthorListView.fxml", new AuthorListViewController(authors, rootPane), rootPane);
 		}
+		//Add Author
 		else if(event.getSource() == menuItemAddAuthors) {
 			controller.changeView("/view/AuthorDetailView.fxml", new AuthorDetailController(new Author()), rootPane);
 		}
+		//Book list view
 		else if(event.getSource() == menuItemBooks) {
-			try {
-				books = bookGateway.getBooks();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			books = bookGateway.getBooks();
 			controller.changeView("/view/BookListView.fxml", new BookListViewController(books, rootPane), rootPane);
 		}
+		//Add Book
 		else if(event.getSource() == menuItemAddBook){
 			controller.changeView("/view/BookDetailView.fxml", new BookDetailController(new Book()), rootPane);
 		}
+		//Quit
 		else if(event.getSource() == menuItemQuit) {
-			gateway.closeConnection();
+			authorGateway.closeConnection();
 			System.exit(0);
 		}
 	}

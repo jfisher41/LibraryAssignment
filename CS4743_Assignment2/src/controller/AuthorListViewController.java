@@ -2,9 +2,12 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import db.AuthorTableGateway;
+import db.GatewayDistributer;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
@@ -15,6 +18,7 @@ import javafx.scene.control.Button;
 import model.Author;
 
 public class AuthorListViewController implements Initializable{
+	private GatewayDistributer distributer;
 	
 	@FXML private ListView<Author> authorList;
 	@FXML private Button deleteButton;
@@ -23,26 +27,25 @@ public class AuthorListViewController implements Initializable{
 	private ObservableList<Author> authors;
 	private BorderPane rootPane;
 	private ControllerSingleton controller = ControllerSingleton.getInstance();
+	private AuthorTableGateway gateway;
 
 	public AuthorListViewController(ObservableList<Author> authors, BorderPane rootPane) {
+		distributer = GatewayDistributer.getInstance();
+		gateway = distributer.getAuthorGateway();
+		
 		logger = LogManager.getLogger();
 		this.authors = authors;
 		this.rootPane = rootPane;
 	}
 	
-	@FXML void deleteButtonClicked(MouseEvent event) { 
+	@FXML void deleteButtonClicked(MouseEvent event) throws Exception { 
 		
 		Author selectedAuthor = authorList.getSelectionModel().getSelectedItem();
-		AuthorTableGateway gateway = selectedAuthor.getGateway();
-	
 		selectedAuthor.delete();
 		
 		//update the list view
-		try {
-			authors = gateway.getAuthors();
-			authorList.setItems(authors);
-
-		} catch (Exception e) {	e.printStackTrace(); }
+		authors = gateway.getAuthors();
+		authorList.setItems(authors);
 	}
 	
 	@FXML

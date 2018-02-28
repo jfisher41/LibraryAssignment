@@ -1,43 +1,34 @@
 package book;
 
-import java.sql.Connection;
 import java.util.Calendar;
-
-import controller.ControllerSingleton;
 import db.BookTableGateway;
+import db.GatewayDistributer;
 
 public class BookDelegate {
+	private GatewayDistributer distributer;
+	private BookTableGateway gateway;
 	
-	public BookDelegate() {}
-	
-	public void saveBook(Book book) {
-		BookTableGateway gateway = book.getBookGateway();
-		try {
-			gateway.updateBook(book);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public BookDelegate() {
+		distributer = GatewayDistributer.getInstance();
+		gateway = distributer.getBookGateway();
 	}
 	
-	public void insertBook(Book book) {
-		ControllerSingleton controller = ControllerSingleton.getInstance();
-		Connection conn = controller.getConnection();
-		BookTableGateway gateway = new BookTableGateway(conn);
-		 
+	public void saveBook(Book book) {
+		try {
+			gateway.updateBook(book);
+		} catch (Exception e) { e.printStackTrace(); }
+	}
+	
+	public void insertBook(Book book) {		 
 		try {
 			gateway.insertBook(book);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) { e.printStackTrace(); }
 	}
 	
 	public void deleteBook(Book book) {
-		BookTableGateway gateway = book.getBookGateway();
 		try {
 			gateway.deleteBook(book);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) { e.printStackTrace(); }
 	}
 	
 	public boolean isValidTitle(String title) {

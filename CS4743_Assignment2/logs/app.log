@@ -254,3 +254,54 @@
 14:20:23.102 INFO  launcher.Launcher : start() called
 14:20:23.135 INFO  controller.ControllerSingleton : Creating connection...
 14:20:55.472 INFO  db.AuthorTableGateway : Closing connection...
+14:45:46.039 INFO  launcher.Launcher : start() called
+14:45:46.077 INFO  controller.ControllerSingleton : Creating connection...
+15:16:03.709 INFO  launcher.Launcher : start() called
+15:16:03.745 INFO  controller.ControllerSingleton : Creating connection...
+15:16:11.754 INFO  controller.BookListViewController : Harry Potter and the Chamber of Secrets double clicked
+15:16:16.744 INFO  controller.BookDetailController : SAVE button clicked
+15:16:16.778 INFO  db.BookTableGateway : Harry Potter and the Chamber of Secretsss SAVED
+15:16:23.446 INFO  controller.BookListViewController : Harry Potter and the Chamber of Secretsss double clicked
+15:16:27.356 INFO  controller.BookDetailController : SAVE button clicked
+15:16:27.396 INFO  db.BookTableGateway : Harry Potter and the Chamber of Secrets SAVED
+15:21:56.024 INFO  launcher.Launcher : start() called
+15:21:56.052 INFO  controller.ControllerSingleton : Creating connection...
+15:22:02.703 INFO  controller.AuthorListViewController : H.G. Wells double clicked
+15:22:06.058 INFO  controller.AuthorDetailController : SAVE button clicked
+15:22:06.096 INFO  db.AuthorTableGateway : H.G. Wells SAVED
+15:24:59.806 INFO  launcher.Launcher : start() called
+15:24:59.836 INFO  controller.ControllerSingleton : Creating connection...
+15:25:05.792 INFO  controller.BookListViewController : Harry Potter and the Chamber of Secrets double clicked
+15:36:17.135 INFO  launcher.Launcher : start() called
+15:36:17.173 INFO  controller.ControllerSingleton : Creating connection...
+15:36:23.242 INFO  controller.AuthorListViewController : H.G. Wells double clicked
+15:36:28.131 INFO  controller.AuthorDetailController : SAVE button clicked
+15:36:28.158 INFO  db.AuthorTableGateway : H.G.hhh Wells SAVED
+15:36:35.607 INFO  controller.AuthorListViewController : H.G.hhh Wells double clicked
+15:36:40.417 INFO  controller.AuthorDetailController : SAVE button clicked
+15:36:40.475 INFO  db.AuthorTableGateway : H.G. Wells SAVED
+15:36:55.622 INFO  controller.AuthorDetailController : SAVE button clicked
+15:36:55.658 INFO  db.AuthorTableGateway : Blah Blah INSERTED
+15:36:58.949 INFO  controller.AuthorDetailController : SAVE button clicked
+15:36:58.978 INFO  db.AuthorTableGateway : Blah Blah SAVED
+15:37:06.597 INFO  db.AuthorTableGateway : Blah Blah DELETED
+15:37:17.935 INFO  controller.BookListViewController : Harry Potter and the Philosopher's Stone double clicked
+15:37:23.484 INFO  controller.BookDetailController : SAVE button clicked
+15:37:23.515 INFO  db.BookTableGateway : Harry Potter and the Philosopher's Stone SAVED
+15:37:30.653 INFO  controller.BookDetailController : SAVE button clicked
+15:37:30.689 INFO  db.BookTableGateway : Harry Potter and the Philosopher's Stoney SAVED
+15:37:35.424 INFO  controller.BookListViewController : Harry Potter and the Philosopher's Stoney double clicked
+15:37:40.593 INFO  controller.BookDetailController : SAVE button clicked
+15:37:40.627 INFO  db.BookTableGateway : Harry Potter and the Philosopher's Stone SAVED
+15:37:55.725 INFO  controller.BookDetailController : SAVE button clicked
+15:37:55.755 INFO  db.BookTableGateway : Mystery INSERTED
+15:37:57.702 INFO  controller.BookDetailController : SAVE button clicked
+15:37:57.729 INFO  db.BookTableGateway : Mystery SAVED
+15:38:03.848 INFO  db.BookTableGateway : StringProperty [value: Mystery] DELETED
+15:38:13.170 INFO  controller.AuthorListViewController : H.G. Wells double clicked
+15:38:16.726 INFO  controller.AuthorDetailController : SAVE button clicked
+15:38:16.726 ERROR controller.AuthorDetailController : Invalid Firstname:	""
+15:38:24.307 INFO  controller.BookListViewController : Harry Potter and the Chamber of Secrets double clicked
+15:38:30.469 INFO  controller.BookDetailController : SAVE button clicked
+15:38:30.470 ERROR controller.BookDetailController : Invalid Title:	""
+15:38:43.555 INFO  db.AuthorTableGateway : Closing connection...

@@ -1,15 +1,12 @@
 package controller;
-import java.net.URL;
-import java.sql.Connection;
-import java.time.LocalDate;
-import java.util.ResourceBundle;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import book.Book;
 import book.Publisher;
-import db.BookTableGateway;
+import db.GatewayDistributer;
 import db.PublisherTableGateway;
 import javafx.fxml.Initializable;
 import javafx.collections.ObservableList;
@@ -21,24 +18,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.util.converter.NumberStringConverter;
-import model.Author;
 import misc.AlertHelper;
 
 public class BookDetailController implements Initializable{
-	
-	private String origTitle;
-	private String origYearPub;
-	private LocalDate origDateAdded;
-	private String origIsbn;
-	private String origSummary;
+	private GatewayDistributer distributer;
 	
 	private static Logger logger;
 	private Book book;
-	private BookTableGateway bookGateway;
 	private PublisherTableGateway pubGateway;
 	private ObservableList<Publisher> publishers;
-	private ControllerSingleton controller;
-	private Connection conn;
 	
 	@FXML private TextField title;
 	@FXML private TextField publisher;
@@ -49,21 +37,16 @@ public class BookDetailController implements Initializable{
 	@FXML private Button saveButton;
     @FXML private ComboBox<Publisher> publishersCombo;
 
-	public BookDetailController(Book book) {
-		controller = ControllerSingleton.getInstance();
-		conn = controller.getConnection(); 
+	public BookDetailController(Book book) throws Exception {
+		distributer = GatewayDistributer.getInstance();
 		
+		pubGateway = distributer.getPublisherGateway();
+		publishers = pubGateway.getPublishers();
 		logger = LogManager.getLogger();
-		this.book = book;
 		
-		bookGateway = this.book.getBookGateway();
-		pubGateway = new PublisherTableGateway(conn);
-		try {
-			publishers = pubGateway.getPublishers();
-		} catch (Exception e) { e.printStackTrace(); }
+		this.book = book;
 	}
 	 
-	
 	@FXML
 	void saveButtonClicked(MouseEvent event){
 		logger.info("SAVE button clicked");
@@ -106,7 +89,5 @@ public class BookDetailController implements Initializable{
 		isbn.textProperty().bindBidirectional(book.getIsbnProperty());
 		date_added.valueProperty().bindBidirectional(book.getDateAddedProperty());
 		summary.textProperty().bindBidirectional(book.getSummaryProperty());
-
-		
 	}
 }

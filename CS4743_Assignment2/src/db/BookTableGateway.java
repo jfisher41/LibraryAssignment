@@ -4,10 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import book.Book;
@@ -48,7 +46,6 @@ public class BookTableGateway {
 		ObservableList<Book> books = FXCollections.observableArrayList();
 				
 		try {
-			//st = conn.prepareStatement("SELECT * FROM `Book` ORDER BY `Book`.`title` ASC");
 			ResultSet rs = st.executeQuery();
 			while(rs.next()) {
 				Book book = new Book();
@@ -96,7 +93,6 @@ public class BookTableGateway {
 			st.setInt(6, book.getId());
 			st.executeUpdate();
 			
-			//System.out.println(book.getPublisher().getPublisherName() + " " + book.getPublisher().getId() + " in book");
 			logger.info(book.getTitle() + " SAVED");
 			
 		} catch (SQLException e) {

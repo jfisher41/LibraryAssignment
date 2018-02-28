@@ -1,42 +1,34 @@
 package model;
 
-import java.sql.Connection;
 import java.time.LocalDate;
-import controller.ControllerSingleton;
 import db.AuthorTableGateway;
+import db.GatewayDistributer;
 
 public class AuthorDelegate {
+	private GatewayDistributer distributer;
+	private AuthorTableGateway gateway;
 	
-	public AuthorDelegate() {}
+	public AuthorDelegate() {
+		distributer = GatewayDistributer.getInstance();
+		gateway = distributer.getAuthorGateway();
+	}
 	
 	public void saveAuthor(Author author) {
-		AuthorTableGateway gateway = author.getGateway();
 		try {
 			gateway.updateAuthor(author);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) { e.printStackTrace(); }
 	}
 	
 	public void insertAuthor(Author author) {
-		ControllerSingleton controller = ControllerSingleton.getInstance();
-		Connection conn = controller.getConnection();
-		AuthorTableGateway gateway = new AuthorTableGateway(conn);
-		 
 		try {
 			gateway.insertAuthor(author);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) { e.printStackTrace(); }
 	}
 	
 	public void deleteAuthor(Author author) {
-		AuthorTableGateway gateway = author.getGateway();
 		try {
 			gateway.deleteAuthor(author);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		} catch (Exception e) { e.printStackTrace(); }
 	}
 	
 	//Validators

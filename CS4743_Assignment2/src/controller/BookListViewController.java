@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Logger;
 
 import book.Book;
 import db.BookTableGateway;
+import db.GatewayDistributer;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
@@ -19,22 +20,22 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.control.Button;
 
 public class BookListViewController implements Initializable{
+	private GatewayDistributer distributer;
+	
+	private BookTableGateway gateway;
+	private static Logger logger;
+	private ObservableList<Book> books;
+	private BorderPane rootPane;
+	private ControllerSingleton controller = ControllerSingleton.getInstance();
 	
 	@FXML private ListView<Book> bookList;
 	@FXML private Button deleteButton;
     @FXML private TextField searchField;
     @FXML private Button searchButton;
    
-    private Connection conn;
-    private BookTableGateway gateway;
-	private static Logger logger;
-	private ObservableList<Book> books;
-	private BorderPane rootPane;
-	private ControllerSingleton controller = ControllerSingleton.getInstance();
-
 	public BookListViewController(ObservableList<Book> books, BorderPane rootPane) {
-		conn = controller.getConnection();
-		gateway = new BookTableGateway(conn);
+		distributer = GatewayDistributer.getInstance();
+		gateway = distributer.getBookGateway();
 		
 		logger = LogManager.getLogger();
 		this.books = books;
@@ -42,9 +43,7 @@ public class BookListViewController implements Initializable{
 	}
 	
 	@FXML void deleteButtonClicked(MouseEvent event) { 
-		
 		Book selectedBook = bookList.getSelectionModel().getSelectedItem();
-	
 		selectedBook.delete();
 		
 		//update the list view
@@ -72,7 +71,7 @@ public class BookListViewController implements Initializable{
 	}
 	
 	@FXML
-	void onBookListClicked(MouseEvent click) {
+	void onBookListClicked(MouseEvent click) throws Exception {
 		
 		if (click.getClickCount() == 2) {
 			Book book = bookList.getSelectionModel().getSelectedItem();
