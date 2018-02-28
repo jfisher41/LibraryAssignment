@@ -66,6 +66,9 @@ public class MenuController implements Initializable {
 			}
 			controller.changeView("/view/BookListView.fxml", new BookListViewController(books, rootPane), rootPane);
 		}
+		else if(event.getSource() == menuItemAddBook){
+			controller.changeView("/view/BookDetailView.fxml", new BookDetailController(new Book()), rootPane);
+		}
 		else if(event.getSource() == menuItemQuit) {
 			gateway.closeConnection();
 			System.exit(0);

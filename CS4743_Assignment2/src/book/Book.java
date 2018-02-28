@@ -57,6 +57,10 @@ public class Book {
 			helper.saveBook(this);
 	}
 	
+	public void delete(){
+		helper.deleteBook(this);
+	}
+	
 
 	//getters
 	public int getId() { return id;	}

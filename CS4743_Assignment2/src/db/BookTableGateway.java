@@ -34,11 +34,21 @@ public class BookTableGateway {
 	}
 	
 	public ObservableList<Book> getBooks() throws Exception{
+		PreparedStatement st = conn.prepareStatement("SELECT * FROM `Book` ORDER BY `Book`.`title` ASC");
+		return searchBooks(st);
+	}
+	
+	//override the previous methods to accept a searchable string
+	public ObservableList<Book> getBooks(String stringToFind) throws Exception{
+		PreparedStatement st = conn.prepareStatement("SELECT * FROM Book WHERE title LIKE '%" + stringToFind + "%'");
+		return searchBooks(st);
+	}
+	
+	public ObservableList<Book> searchBooks(PreparedStatement st) throws Exception{
 		ObservableList<Book> books = FXCollections.observableArrayList();
-		PreparedStatement st = null;
-		
+				
 		try {
-			st = conn.prepareStatement("SELECT * FROM `Book` ORDER BY `Book`.`title` ASC");
+			//st = conn.prepareStatement("SELECT * FROM `Book` ORDER BY `Book`.`title` ASC");
 			ResultSet rs = st.executeQuery();
 			while(rs.next()) {
 				Book book = new Book();

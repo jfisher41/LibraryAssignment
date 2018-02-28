@@ -8,8 +8,8 @@ public class Publisher {
 	
 	public Publisher() {
 		publisherName = new SimpleStringProperty();
-		id = 0;
-		publisherName.set("");
+		id = 1;
+		publisherName.set("Unknown");
 	}
 
 	public String toString() {

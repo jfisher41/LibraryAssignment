@@ -1,7 +1,9 @@
 package controller;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,12 +25,17 @@ public class BookListViewController implements Initializable{
     @FXML private TextField searchField;
     @FXML private Button searchButton;
    
+    private Connection conn;
+    private BookTableGateway gateway;
 	private static Logger logger;
 	private ObservableList<Book> books;
 	private BorderPane rootPane;
 	private ControllerSingleton controller = ControllerSingleton.getInstance();
 
 	public BookListViewController(ObservableList<Book> books, BorderPane rootPane) {
+		conn = controller.getConnection();
+		gateway = new BookTableGateway(conn);
+		
 		logger = LogManager.getLogger();
 		this.books = books;
 		this.rootPane = rootPane;
@@ -37,9 +44,8 @@ public class BookListViewController implements Initializable{
 	@FXML void deleteButtonClicked(MouseEvent event) { 
 		
 		Book selectedBook = bookList.getSelectionModel().getSelectedItem();
-		BookTableGateway gateway = selectedBook.getBookGateway();
 	
-		//selectedBook.delete();
+		selectedBook.delete();
 		
 		//update the list view
 		try {
@@ -48,10 +54,22 @@ public class BookListViewController implements Initializable{
 
 		} catch (Exception e) {	e.printStackTrace(); }
 	}
-	   @FXML
-	    void onSearchButtonClicked(MouseEvent event) {
+	@FXML
+	void onSearchButtonClicked(MouseEvent event) {
+		String searchString = searchField.getText();
 
-	    }
+		//update the list view
+		try {
+			if(searchString.length() > 0){
+				books = gateway.getBooks(searchString);
+				bookList.setItems(books);
+			}
+			else{
+				books = gateway.getBooks();
+				bookList.setItems(books);
+			}
+		} catch (Exception e) {	e.printStackTrace(); }
+	}
 	
 	@FXML
 	void onBookListClicked(MouseEvent click) {
