@@ -19,7 +19,7 @@ public class Launcher extends Application {
 		
 		Parent rootPane = FXMLLoader.load(getClass().getResource("/view/MainMenu.fxml"));
 		Scene scene = new Scene(rootPane, 600, 400);
-		stage.setTitle("Assignment 2");
+		stage.setTitle("Assignment 3");
 		stage.setScene(scene);
 		stage.show();		
 	}

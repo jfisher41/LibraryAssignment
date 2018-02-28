@@ -16,10 +16,12 @@ import book.Publisher;
 public class BookTableGateway {
 	private Connection conn;
 	private static Logger logger;
+	private PublisherTableGateway pubGateway;
 	
 	public BookTableGateway(Connection conn) {
 		this.conn = conn;
 		logger = LogManager.getLogger();
+		pubGateway = new PublisherTableGateway(conn);
 	}
 	
 	public void closeConnection() {
@@ -35,7 +37,7 @@ public class BookTableGateway {
 	public ObservableList<Book> getBooks() throws Exception{
 		ObservableList<Book> books = FXCollections.observableArrayList();
 		PreparedStatement st = null;
-		PreparedStatement publisherStatement = null;
+		
 		try {
 			st = conn.prepareStatement("SELECT * FROM `Book` ORDER BY `Book`.`title` ASC");
 			ResultSet rs = st.executeQuery();
@@ -47,20 +49,7 @@ public class BookTableGateway {
 				book.setYearPublished((rs.getInt("year_published")));
 				book.setIsbn(rs.getString("isbn"));
 			
-				int publisherId = rs.getInt("publisher_id");
-				
-				Publisher publisher = new Publisher();
-				publisherStatement = conn.prepareStatement("SELECT * FROM `Publisher` WHERE `id` = ?");
-				publisherStatement.setInt(1, book.getId());
-				
-				ResultSet pub_rs = publisherStatement.executeQuery();
-				//publisher.setPublisherName(pub_rs.getString("publisher_name"));
-				//publisher.setId(pub_rs.getInt("id"));
-				
-				publisher.setId(1);
-				publisher.setPublisherName("Bob");
-				book.setPublisher(publisher);
-				
+				book.setPublisher(pubGateway.getPublisher(book.getId()));
 				
 				book.setBookGateway(this);
 				books.add(book);	
@@ -81,54 +70,25 @@ public class BookTableGateway {
 		return books;
 	}
 	
-	public ObservableList<Publisher> getPublishers() throws Exception{
-		ObservableList<Publisher> publishers = FXCollections.observableArrayList();
-		PreparedStatement st = null;
 	
-		try {
-			st = conn.prepareStatement("SELECT * FROM `Publisher` ORDER BY `Publisher`.`publisher_name` ASC");
-			ResultSet rs = st.executeQuery();
-			while(rs.next()) {
-				Publisher publisher = new Publisher();
-				publisher.setId(rs.getInt("id"));
-				publisher.setPublisherName(rs.getString("publisher_name"));
-				
-				publishers.add(publisher);	
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			throw new Exception(e);
-		} finally {
-			try {
-				if(st != null)
-					st.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-				throw new Exception(e);
-			}
-		}
-		
-		return publishers;
-	}
-	/**
-	public void updateAuthor(Author author) throws Exception {
+	public void updateBook(Book book) throws Exception {
 		PreparedStatement st = null;
 		try {
-			st = conn.prepareStatement("update Author set first_name = ?, "
-					+ "last_name = ?, "
-					+ "dob = ?, "
-					+ "gender = ?, "
-					+ "web_site = ?  "
+			st = conn.prepareStatement("update Book set title = ?, "
+					+ "summary = ?, "
+					+ "year_published = ?, "
+					+ "publisher_id = ?, "
+					+ "isbn = ?  "
 					+ "where id = ?");
-			st.setString(1, author.getFirstName());
-			st.setString(2, author.getLastName());
-			st.setDate(3, author.getDobDate());
-			st.setString(4, author.getGender());
-			st.setString(5, author.getWebsite());
-			st.setInt(6, author.getId());
+			st.setString(1, book.getTitle());
+			st.setString(2, book.getSummary());
+			st.setInt(3, book.getYearPublished());
+			st.setInt(4, book.getPublisher().getId());
+			st.setString(5, book.getIsbn());
+			st.setInt(6, book.getId());
 			st.executeUpdate();
 			
-			logger.info(author.getFirstName() + " " + author.getLastName() + " SAVED");
+			logger.info(book.getTitle() + " SAVED");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -144,6 +104,7 @@ public class BookTableGateway {
 		}
 	}
 	
+	/**
 	public void insertAuthor(Author author) throws Exception {
 		PreparedStatement st = null;
 		PreparedStatement stFindLast = null;

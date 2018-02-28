@@ -15,6 +15,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import db.AuthorTableGateway;
 import db.BookTableGateway;
+import db.PublisherTableGateway;
 import model.Author;
 
 public class MenuController implements Initializable {
@@ -28,6 +29,7 @@ public class MenuController implements Initializable {
 	
 	AuthorTableGateway gateway;
 	BookTableGateway bookGateway;
+	//PublisherTableGateway pupGateway;
 	
 	private ObservableList<Author> authors;
 	private ObservableList<Book> books;
@@ -37,6 +39,7 @@ public class MenuController implements Initializable {
 	public MenuController() {
 		controller = ControllerSingleton.getInstance();
 		conn = controller.getConnection();
+		//pupGateway = new PublisherTableGateway(conn);
 		bookGateway = new BookTableGateway(conn);
 		gateway = new AuthorTableGateway(conn);
 		

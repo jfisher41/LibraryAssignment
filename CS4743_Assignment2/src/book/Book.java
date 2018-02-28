@@ -19,6 +19,8 @@ public class Book {
 	public SimpleStringProperty isbn;
 	public SimpleObjectProperty<LocalDate> dateAdded;
 	
+	public SimpleIntegerProperty publisherID;
+	
 	private BookTableGateway gateway;
 	
 	public Book() {
@@ -31,6 +33,7 @@ public class Book {
 		publisher = new SimpleObjectProperty<Publisher>();
 		isbn = new SimpleStringProperty();
 		dateAdded = new SimpleObjectProperty<LocalDate>();
+		publisherID = new SimpleIntegerProperty();
 		
 		title.set("");
 		summary.set("");
@@ -38,11 +41,21 @@ public class Book {
 		publisher.set(new Publisher());
 		isbn.set("");
 		dateAdded.set(LocalDate.now());
+		publisherID.set(1);
 	}
 	
 	public String toString() {
 		return title.get();
 	}
+	/**
+	public void save(){
+		if(id == 0) {
+			helper.insertAuthor(this);
+		}
+		else
+			helper.saveAuthor(this);
+	}
+	**/
 
 	//getters
 	public int getId() { return id;	}
