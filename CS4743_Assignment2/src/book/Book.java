@@ -47,15 +47,16 @@ public class Book {
 	public String toString() {
 		return title.get();
 	}
-	/**
+	
 	public void save(){
+		
 		if(id == 0) {
-			helper.insertAuthor(this);
+			helper.insertBook(this);
 		}
 		else
-			helper.saveAuthor(this);
+			helper.saveBook(this);
 	}
-	**/
+	
 
 	//getters
 	public int getId() { return id;	}

@@ -11,7 +11,6 @@ import org.apache.logging.log4j.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import book.Book;
-import book.Publisher;
 
 public class BookTableGateway {
 	private Connection conn;
@@ -48,8 +47,7 @@ public class BookTableGateway {
 				book.setSummary(rs.getString("summary"));
 				book.setYearPublished((rs.getInt("year_published")));
 				book.setIsbn(rs.getString("isbn"));
-			
-				book.setPublisher(pubGateway.getPublisher(book.getId()));
+				book.setPublisher(pubGateway.getPublisherById(rs.getInt("publisher_id")));
 				
 				book.setBookGateway(this);
 				books.add(book);	
@@ -88,6 +86,7 @@ public class BookTableGateway {
 			st.setInt(6, book.getId());
 			st.executeUpdate();
 			
+			//System.out.println(book.getPublisher().getPublisherName() + " " + book.getPublisher().getId() + " in book");
 			logger.info(book.getTitle() + " SAVED");
 			
 		} catch (SQLException e) {
@@ -104,28 +103,28 @@ public class BookTableGateway {
 		}
 	}
 	
-	/**
-	public void insertAuthor(Author author) throws Exception {
+	
+	public void insertBook(Book book) throws Exception {
 		PreparedStatement st = null;
 		PreparedStatement stFindLast = null;
 		
 		try {
-			st = conn.prepareStatement("INSERT INTO Author(first_name,last_name,dob,gender,web_site) VALUES(?,?,?,?,?)");
-			st.setString(1, author.getFirstName());
-			st.setString(2, author.getLastName());
-			st.setDate(3, author.getDobDate());
-			st.setString(4, author.getGender());
-			st.setString(5, author.getWebsite());
+			st = conn.prepareStatement("INSERT INTO Book(title,summary,year_published,publisher_id,isbn) VALUES(?,?,?,?,?)");
+			st.setString(1, book.getTitle());
+			st.setString(2, book.getSummary());
+			st.setInt(3, book.getYearPublished());
+			st.setInt(4, book.getPublisher().getId());
+			st.setString(5, book.getIsbn());
 			
 			st.executeUpdate();
 			
-			stFindLast = conn.prepareStatement("SELECT * FROM `Author` WHERE 1 ORDER BY id DESC LIMIT 1 ");
+			stFindLast = conn.prepareStatement("SELECT * FROM `Book` WHERE 1 ORDER BY id DESC LIMIT 1 ");
 			ResultSet rs = stFindLast.executeQuery();
 			rs.next();
-			author.setId(rs.getInt("id"));
-			author.setGateway(this);
+			book.setId(rs.getInt("id"));
+			book.setBookGateway(this);
 
-			logger.info(author.getFirstName() + " " + author.getLastName() + " INSERTED");
+			logger.info(book.getTitle() + " INSERTED");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -141,14 +140,14 @@ public class BookTableGateway {
 		}
 	}
 	
-	public void deleteAuthor(Author author) throws Exception {
+	public void deleteBook(Book book) throws Exception {
 		PreparedStatement st = null;
 		try {
-			st = conn.prepareStatement("DELETE FROM Author WHERE id = ?");
-			st.setInt(1, author.getId());
+			st = conn.prepareStatement("DELETE FROM Book WHERE id = ?");
+			st.setInt(1, book.getId());
 			st.executeUpdate();
 			
-			logger.info(author.getFirstName() + " " + author.getLastName() + " DELETED");
+			logger.info(book.title + " DELETED");
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -163,5 +162,5 @@ public class BookTableGateway {
 			}
 		}
 	}
-	**/
+	
 }

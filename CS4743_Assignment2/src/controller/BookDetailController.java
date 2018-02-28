@@ -80,12 +80,6 @@ public class BookDetailController implements Initializable{
     		AlertHelper.showWarningMessage("SAVE ERROR", "Summary is invalid", "Book summaries must be less than 65,536 characters.");
     		//lastName.textProperty().set(origLastName);
 		}
-		//fix
-		else if(!book.isValidPublished(book.getYearPublished())) {
-    		logger.error("Invalid Date:\t\"" + book.getYearPublished() + "\"");
-    		AlertHelper.showWarningMessage("SAVE ERROR", "Date is invalid", "Date must be before the current date.");
-    		//dob.valueProperty().set(origDate);
-		}
 		else if(!book.isValidPublished(book.getYearPublished())) {
     		logger.error("Invalid Gender:\t\"" + book.getYearPublished() + "\"");
     		AlertHelper.showWarningMessage("SAVE ERROR", "Year published is invalid", "The year published cannot be after the current year.");
@@ -97,7 +91,8 @@ public class BookDetailController implements Initializable{
     		//web.textProperty().set(origWebsite);
 		}
 		else {
-			//book.save();
+			book.setPublisher(publishersCombo.getSelectionModel().getSelectedItem());
+			book.save();
 		}
 	}
 

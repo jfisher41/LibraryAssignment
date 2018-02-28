@@ -155,3 +155,64 @@
 12:44:24.504 INFO  controller.ControllerSingleton : Creating connection...
 12:44:38.137 INFO  launcher.Launcher : start() called
 12:44:38.197 INFO  controller.ControllerSingleton : Creating connection...
+13:09:48.238 INFO  launcher.Launcher : start() called
+13:09:48.275 INFO  controller.ControllerSingleton : Creating connection...
+13:10:15.645 INFO  launcher.Launcher : start() called
+13:10:15.682 INFO  controller.ControllerSingleton : Creating connection...
+13:10:21.070 INFO  controller.BookListViewController : Journey to the Centre of the Earth double clicked
+13:11:08.976 INFO  controller.BookDetailController : SAVE button clicked
+13:11:09.017 INFO  db.BookTableGateway : Journey to the Centre of the Earth SAVED
+13:11:19.257 INFO  controller.BookListViewController : Journey to the Centre of the Earth double clicked
+13:11:32.717 INFO  db.AuthorTableGateway : Closing connection...
+13:12:51.853 INFO  launcher.Launcher : start() called
+13:12:51.880 INFO  controller.ControllerSingleton : Creating connection...
+13:12:57.856 INFO  controller.BookListViewController : Journey to the Centre of the Earth double clicked
+13:13:03.394 INFO  controller.BookDetailController : SAVE button clicked
+13:13:03.421 INFO  db.BookTableGateway : Journey to the Centre of the Earth SAVED
+13:13:10.085 INFO  controller.BookListViewController : Journey to the Centre of the Earth double clicked
+13:13:59.644 INFO  launcher.Launcher : start() called
+13:13:59.673 INFO  controller.ControllerSingleton : Creating connection...
+13:14:05.561 INFO  controller.BookListViewController : Journey to the Centre of the Earth double clicked
+13:14:11.662 INFO  controller.BookDetailController : SAVE button clicked
+13:14:11.692 INFO  db.BookTableGateway : Journey to the Centre of the Earth SAVED
+13:16:22.962 INFO  launcher.Launcher : start() called
+13:16:22.999 INFO  controller.ControllerSingleton : Creating connection...
+13:16:30.470 INFO  controller.BookListViewController : Journey to the Centre of the Earth double clicked
+13:16:34.525 INFO  controller.BookDetailController : SAVE button clicked
+13:16:34.566 INFO  db.BookTableGateway : Journey to the Centre of the Earth SAVED
+13:16:47.094 INFO  controller.BookListViewController : Journey to the Centre of the Earth double clicked
+13:17:55.317 INFO  launcher.Launcher : start() called
+13:17:55.344 INFO  controller.ControllerSingleton : Creating connection...
+13:18:00.842 INFO  controller.BookListViewController : Journey to the Centre of the Earth double clicked
+13:18:04.749 INFO  controller.BookDetailController : SAVE button clicked
+13:18:04.806 INFO  db.BookTableGateway : Journey to the Centre of the Earth SAVED
+13:18:46.037 INFO  launcher.Launcher : start() called
+13:18:46.066 INFO  controller.ControllerSingleton : Creating connection...
+13:18:50.558 INFO  controller.BookListViewController : Journey to the Centre of the Earth double clicked
+13:18:54.242 INFO  controller.BookDetailController : SAVE button clicked
+13:18:54.275 INFO  db.BookTableGateway : Journey to the Centre of the Earth SAVED
+13:21:02.633 INFO  launcher.Launcher : start() called
+13:21:02.660 INFO  controller.ControllerSingleton : Creating connection...
+13:21:08.357 INFO  controller.BookListViewController : Journey to the Centre of the Earth double clicked
+13:21:15.423 INFO  controller.BookDetailController : SAVE button clicked
+13:21:15.463 INFO  db.BookTableGateway : Journey to the Centre of the Earth SAVED
+13:21:23.185 INFO  controller.BookListViewController : Journey to the Centre of the Earth double clicked
+13:22:26.202 INFO  launcher.Launcher : start() called
+13:22:26.231 INFO  controller.ControllerSingleton : Creating connection...
+13:22:32.120 INFO  controller.BookListViewController : Journey to the Centre of the Earth double clicked
+13:22:35.607 INFO  controller.BookDetailController : SAVE button clicked
+13:22:35.639 INFO  db.BookTableGateway : Journey to the Centre of the Earth SAVED
+13:26:24.041 INFO  launcher.Launcher : start() called
+13:26:24.071 INFO  controller.ControllerSingleton : Creating connection...
+13:26:29.705 INFO  controller.BookListViewController : Journey to the Centre of the Earth double clicked
+13:26:33.783 INFO  controller.BookDetailController : SAVE button clicked
+13:26:33.828 INFO  db.BookTableGateway : Journey to the Centre of the Earth SAVED
+13:27:48.930 INFO  launcher.Launcher : start() called
+13:27:48.965 INFO  controller.ControllerSingleton : Creating connection...
+13:27:53.700 INFO  controller.BookListViewController : Journey to the Centre of the Earth double clicked
+13:28:15.032 INFO  launcher.Launcher : start() called
+13:28:15.058 INFO  controller.ControllerSingleton : Creating connection...
+13:28:23.737 INFO  controller.BookListViewController : Journey to the Centre of the Earth double clicked
+13:28:30.089 INFO  controller.BookDetailController : SAVE button clicked
+13:28:30.120 INFO  db.BookTableGateway : Journey to the Centre of the Earth SAVED
+13:28:37.735 INFO  controller.BookListViewController : Journey to the Centre of the Earth double clicked

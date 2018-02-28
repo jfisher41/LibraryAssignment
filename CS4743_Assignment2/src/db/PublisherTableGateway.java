@@ -62,7 +62,7 @@ public class PublisherTableGateway {
 		return publishers;
 	}
 	
-	public Publisher getPublisher(int id) throws Exception{
+	public Publisher getPublisherById(int id) throws Exception{
 		PreparedStatement st = null;
 		Publisher publisher = new Publisher();
 		
