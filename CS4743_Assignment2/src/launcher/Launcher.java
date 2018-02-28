@@ -8,8 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-/**CS 4743 Assignment 2 by Jonathan Fisher **/
-/** No team members **/
+/**CS 4743 Assignment 2 by Brian Biever & Jonathan Fisher**/
 
 public class Launcher extends Application {
 	private static Logger logger = LogManager.getLogger();
