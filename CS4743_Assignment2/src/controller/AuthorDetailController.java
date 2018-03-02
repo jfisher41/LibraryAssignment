@@ -60,7 +60,7 @@ public class AuthorDetailController implements Initializable{
 		}
 		else if(!author.isValidGender(author.getGender())) {
     		logger.error("Invalid Gender:\t\"" + author.getGender() + "\"");
-    		AlertHelper.showWarningMessage("SAVE ERROR", "Gender is invalid", "While we can not assume your gender, we can reject it.");
+    		AlertHelper.showWarningMessage("SAVE ERROR", "Gender is invalid", "Genders can only be 'Male', 'Female', or 'Unknwon'.");
     		gender.textProperty().set(origGender);
 		}
 		else if(!author.isValidWebsite(author.getWebsite())) {
