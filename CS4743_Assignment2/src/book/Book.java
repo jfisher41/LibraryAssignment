@@ -2,6 +2,7 @@ package book;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import db.BookTableGateway;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -107,12 +108,12 @@ public class Book {
 	
 	public void setBookGateway(BookTableGateway gateway) { this.gateway = gateway;}
 
-	/**
+	
 	public void setDateAdded(Date dateAdded) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		this.dateAdded.set(LocalDate.parse(dateAdded.toString(), formatter));
 	}
-	**/
+	
 	
 	//validators
 	public boolean isValidTitle(String title) { return (title.length() > 0 && title.length() <=255); }

@@ -46,11 +46,4 @@ public class BookDelegate {
 	public boolean isValidIsbn(String isbn) {
 		return (isbn.length() <= 13);
 	}
-	
-	/**
-	public boolean isValidDateAdded(Date dateAdded) {
-		
-	}
-	**/
-
 }

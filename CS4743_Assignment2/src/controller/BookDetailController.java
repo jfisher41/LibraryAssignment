@@ -1,6 +1,8 @@
 package controller;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -27,6 +30,7 @@ public class BookDetailController implements Initializable{
 	private Book book;
 	private PublisherTableGateway pubGateway;
 	private ObservableList<Publisher> publishers;
+	private DateFormat format;
 	
 	@FXML private TextField title;
 	@FXML private TextField publisher;
@@ -35,7 +39,9 @@ public class BookDetailController implements Initializable{
 	@FXML private DatePicker date_added;
 	@FXML private TextArea summary;
 	@FXML private Button saveButton;
+	@FXML private Label dateLabel;
     @FXML private ComboBox<Publisher> publishersCombo;
+    
 
 	public BookDetailController(Book book) throws Exception {
 		distributer = GatewayDistributer.getInstance();
@@ -43,6 +49,8 @@ public class BookDetailController implements Initializable{
 		pubGateway = distributer.getPublisherGateway();
 		publishers = pubGateway.getPublishers();
 		logger = LogManager.getLogger();
+		
+		format = new SimpleDateFormat("MMMMM dd, yyyy");
 		
 		this.book = book;
 	}
@@ -87,7 +95,11 @@ public class BookDetailController implements Initializable{
 		//publisher.textProperty().bindBidirectional(book.getPublisher().getPublisherNameProperty());
 		year_published.textProperty().bindBidirectional(book.getYearPublishedProperty(), new NumberStringConverter("####"));
 		isbn.textProperty().bindBidirectional(book.getIsbnProperty());
-		date_added.valueProperty().bindBidirectional(book.getDateAddedProperty());
 		summary.textProperty().bindBidirectional(book.getSummaryProperty());
+		
+		if(book.getId() == 0)
+			dateLabel.setText("N/A");
+		else
+			dateLabel.setText(format.format(book.getDateAdded()));
 	}
 }
